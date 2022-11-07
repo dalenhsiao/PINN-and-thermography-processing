@@ -10,3 +10,7 @@ However, this arises a new problem.
 For practical heat diffusion condition, which is described by Fourier's heat equation, is a 4 components PDE (time, x,y,z). 
 Interestingly, thermography detection is only capable of surface temperature detection. In other words, it fails to provide information underneath.  
 
+In this work, we proposed a physics-informed neural network (PINN) for thermographic data processing.
+PINN not only inherits the prediction capabilities of deep neural networls but also condsider physical laws presented in the form of PDE. 
+The methodology also perform the Fourier's Law PDE parameter discovery, in term realize the numerical simulation of the IR defect detection. 
+
