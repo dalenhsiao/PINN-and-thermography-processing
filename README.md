@@ -39,6 +39,7 @@ The physics information input as PDE combine with a deep neural netwrok structur
 
 # Reminder
 The numpy reshape causes bug in reshaping the image data into (pixels, time_step)
+
 Please use our reshape function in the following for image reshaping, you can also find it in the Utilities
 ```python
 # The processed matrix_store.shape() = (width*length, time_step)
