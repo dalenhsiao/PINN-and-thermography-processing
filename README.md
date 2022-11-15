@@ -14,6 +14,9 @@ In this work, we proposed a physics-informed neural network (PINN) for thermogra
 PINN not only inherits the prediction capabilities of deep neural networls but also condsider physical laws presented in the form of PDE. 
 The methodology also perform the Fourier's Law PDE parameter discovery, in term realize the numerical simulation of the IR defect detection. 
 
+![Project Scheme](https://github.com/dalenhsiao/PINN-and-thermography-processing/blob/main/Doc/project%20scheme.png)
+
+
 
 # Usage
 The Original thermogram data is 425 pixels in width and 617 pixels in length and was sampled at a freqency 1 frame/sec.
