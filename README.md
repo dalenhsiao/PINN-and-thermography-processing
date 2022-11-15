@@ -16,5 +16,17 @@ The methodology also perform the Fourier's Law PDE parameter discovery, in term 
 
 
 # Usage
+```
+# data
+orginal_data = load(./data)
 
 
+# call out a PINN model 
+model = PhysicsInformedNN()
+
+# save model structures, (weights, biases), and the PDE parameter 
+model.save(fileDir)
+
+
+
+```
