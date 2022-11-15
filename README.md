@@ -16,8 +16,9 @@ The methodology also perform the Fourier's Law PDE parameter discovery, in term 
 
 
 # Usage
-The Original thermogram data is 425 pixels in width and 617 pixels in length. 
+The Original thermogram data is 425 pixels in width and 617 pixels in length.
 
+### Data
 Use the following code to load the .mat data:
 ```python
 import scipy.io
@@ -25,6 +26,14 @@ import numpy
 data = scipy.io.loadmat(r'./defect1.mat')
 original = np.array(data["matrix"])
 ```
+Training data 
+
+
+### Model Structure
+The physics information input as PDE combine with a deep neural netwrok structure
+
+
+
 
 # Reminder
 The numpy reshape causes bug in reshaping the image data into (pixels, time_step)
