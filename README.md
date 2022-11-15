@@ -26,7 +26,7 @@ import numpy
 data = scipy.io.loadmat(r'./defect1.mat')
 original = np.array(data["matrix"])
 ```
-- Training data: Real thermography data
+- Thermography Data: Data captured from Active thermography and translated into matrix
 - Collocation Data: Data generated using Latin Hypercube Sampling (LHS) which is uniformly distributed in the (x,y,z,t) data space
 - Boundary Condition: BC at each timestep
 
