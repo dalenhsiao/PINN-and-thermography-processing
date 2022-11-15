@@ -18,7 +18,7 @@ The methodology also perform the Fourier's Law PDE parameter discovery, in term 
 # Usage
 The Original thermogram data is 425 pixels in width and 617 pixels in length and was sampled at a freqency 1 frame/sec.
 
-![Raw thermograms](https://github.com/dalenhsiao/PINN-and-thermography-processing/blob/main/Doc/ezgif.com-gif-maker%20(1).gif)
+![Raw thermograms](https://github.com/dalenhsiao/PINN-and-thermography-processing/blob/main/Doc/Raw_thermograms.gif)
 ### Data
 Use the following code to load the .mat data:
 ```python
