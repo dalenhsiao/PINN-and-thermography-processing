@@ -17,8 +17,9 @@ The methodology also perform the Fourier's Law PDE parameter discovery, in term 
 
 # Usage
 ```python
+
 # data
-orginal_data = load(./data)
+
 
 
 # call out a PINN model 
