@@ -1,5 +1,5 @@
 # PINN-and-thermography-processing
-Adding physics information for an improved prediction (simulation) of the IR thermography detection. 
+Adding physics information for an improved prediction (numerical simulation) of the IR thermography detection. 
 
 For IR thermography, the tricky part of it is the explanation of the detection results. For most cases, there are many outside effects that could deter the detection. 
 Such as backgroumd temperature, IR camera resoulution, measurment noises, and non-homogeniety of surface temperature etc. 
