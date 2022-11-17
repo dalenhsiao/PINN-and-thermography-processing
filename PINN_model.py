@@ -1,5 +1,4 @@
-
-
+# For tf 2.0 and above
 import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
