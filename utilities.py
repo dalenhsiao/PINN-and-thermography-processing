@@ -1,3 +1,8 @@
+"""
+@author: Tung-Yu Hsiao
+"""
+
+
 import numpy as np
 import matplotlib.pyplot as plt
 
