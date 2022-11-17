@@ -1,6 +1,6 @@
-'''
-@au
-
+"""
+@author: Tung-Yu Hsiao
+"""
 import scipy.io
 import copy
 import numpy as np
