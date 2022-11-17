@@ -1,3 +1,8 @@
+"""
+@author: Tung-Yu Hsiao
+"""
+
+
 import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
