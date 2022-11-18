@@ -18,10 +18,10 @@ The methodology also perform the Fourier's Law PDE parameter discovery, in term 
 ![Project Scheme](https://github.com/dalenhsiao/PINN-and-thermography-processing/blob/main/Doc/project%20scheme.png)
 
 
-# Assumption 
-We assume the sound regions are much larger than defect regions, that is, the sound regions consist the majority of the training data. 
+# Assumptions 
+- We assume the sound regions are much larger than defect regions, that is, the sound regions consist the majority of the training data. By that, the model predicted image shall represent the general background of the thermography data. 
 
-By that, the model predicted image shall represent the general background of the thermography data.  
+- The sample is assumed to be a heat insulator, meaning there will be no heat exhange at the boudaries.
 
 
 
