@@ -14,7 +14,14 @@ In this work, we proposed a physics-informed neural network (PINN) for thermogra
 PINN not only inherits the prediction capabilities of deep neural networls but also condsider physical laws presented in the form of PDE. 
 The methodology also perform the Fourier's Law PDE parameter discovery, in term realize the numerical simulation of the IR defect detection. 
 
+
 ![Project Scheme](https://github.com/dalenhsiao/PINN-and-thermography-processing/blob/main/Doc/project%20scheme.png)
+
+
+# Assumption 
+We assume the sound regions are much larger than defect regions, that is, the sound regions consist the majority of the training data. 
+
+By that, the model predicted image shall represent the general background of the thermography data.  
 
 
 
