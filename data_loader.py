@@ -12,7 +12,7 @@ class data_loader(object):
     # sample_pixels = [num_height_pixels,num_width_pixels,num_depth_pixels]
     # sample_dims (actual sample size)= [height, width, depth]
     # t_span = (lb, ub)
-    def __init__(self,file_path, sample_pixels,sample_dims,t_span):
+    def __init__(self,file_path, MAT_dict_label, sample_pixels,sample_dims,t_span):
         # pixel no
         self.height = sample_pixels[0]
         self.width = sample_pixels[1]
