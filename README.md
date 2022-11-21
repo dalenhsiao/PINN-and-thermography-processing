@@ -46,11 +46,10 @@ The methodology also perform the Fourier's Law PDE parameter discovery, in term 
 
 - ```utilities.py``` utilities. 
 
-- ```specimen1_main.py``` is the main code for the PINN evaluation for specimen 1
+- ```specimen1_main.py``` is the main code for the PINN evaluation for specimen 1 (the ddescription for specimen 1 is in section [Specimen 1](#specimen-1)
 
 
-
-# Specimen_1
+# Specimen 1
 The Original thermogram data is 425 pixels in width and 617 pixels in length and was sampled at a freqency 1 frame/sec.
 IR experiment setup:
 
@@ -69,6 +68,12 @@ dl = data_loader("./data/defect1.mat", "matrix",sample_pixels, sample_dims, tspa
 - Thermography Data: Data captured from Active thermography and translated into matrix
 - Collocation Data: Data generated using Latin Hypercube Sampling (LHS) which is uniformly distributed in the (x,y,z,t) data space
 - Boundary Condition: BC at each timestep
+
+
+
+# Specimen 2
+
+
 
 
 
