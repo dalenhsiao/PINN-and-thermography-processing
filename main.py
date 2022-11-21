@@ -24,27 +24,34 @@ total_t = tspan[1]-tspan[0]
 n_train = 100000
 n_f = 10000
 n_bc = 10000
+
+# data_loader(filepath, MAT_dict_label, #of sample pixels, sample real dimensions, inspect tspan)
 dl = data_loader("./data/defect1.mat", "matrix",sample_pixels, sample_dims, tspan)
+# training data sampling 
 X_train = dl.training_X(n_train)
 X_f = dl.collocation_data(n_f)
 x_bc, y_bc, z_bc = dl.bc_data(n_bc)
+
+# boundary coordinates 
 lb, ub = dl.lb, dl.ub
-# real
+
+# real pixel values
 X_star = dl.X_star()
 U = dl.real_u()
 
 
 # Training
-
 N_iter = 100000
 lambda_array = np.zeros(N_iter+2, dtype=float)
 loss_array = np.zeros(N_iter+2,dtype=float)
 
-# Model default stopped at early stopping 1000 steps amd save best paramters only
-layers = [4, 30, 30, 30, 30, 30, 30, 1]
-model = PhysicsInformedNN(X_train, X_f, lb, ub,x_bc, y_bc, z_bc,layers)
+# Model
+layers = [4, 30, 30, 30, 30, 30, 30, 1] 
+model = PhysicsInformedNN(X_train, X_f, lb, ub,x_bc, y_bc, z_bc,layers) 
 model.summary()
 
+# Trainning 
+# Model default stopped at early stopping 1000 steps amd save best paramters only
 Dir = "./Results/"
 cf(Dir)
 model.train(N_iter, loss_array, lambda_array, fileName=Dir+"training")
