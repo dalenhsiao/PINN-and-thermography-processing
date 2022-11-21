@@ -7,7 +7,12 @@ Such as backgroumd temperature, IR camera resoulution, measurment noises, and no
 Here, we try to address the problem using the powerful neural network with the assist of physics information (i.e. the governing PDE) to propagate a solution from known thermograms data (2D data form). 
 
 However, this arises a new problem. 
-For practical heat diffusion condition, which is described by Fourier's heat equation, is a 4 components PDE (time, x,y,z). 
+For practical heat diffusion condition, which is described by Fourier's heat equation:
+
+$f(u(x,y,z,t)) = ∂u/∂t - lambda(∂^2u/∂x^2+∂^2u/∂y^2+∂^2u/∂z^2) $
+
+is a 4 component PDE (time, x,y,z). 
+
 Interestingly, thermography detection is only capable of surface temperature detection. In other words, it fails to provide information underneath.  
 
 In this work, we proposed a physics-informed neural network (PINN) for thermographic data processing.
@@ -30,28 +35,39 @@ The methodology also perform the Fourier's Law PDE parameter discovery, in term 
 
 - The sample is assumed to be a heat insulator, meaning there will be no heat exhange at the boudaries.
 
+- The evaluated data is collected during the cooldown pahse where there is no external heat source and only focuses on the heat diffusion inside the sample.
 
 
 
+# Files
+- ```PINN_model.py``` is the physics informed model for the cooldown phase of IR thermography, given the Fourier's Law of heat conduction. 
 
-# Usage
+- ```data_loader.py``` loads and format the input training data for PINN model training. 
+
+- ```specimen1_main.py``` is the main code for the PINN evaluation for specimen 1
+
+
+
+# Specimen_1
 The Original thermogram data is 425 pixels in width and 617 pixels in length and was sampled at a freqency 1 frame/sec.
+IR experiment setup:
+
+![Exp setup](https://github.com/dalenhsiao/PINN-and-thermography-processing/blob/main/Doc/specimen1.png)
+
+
 
 ![Raw thermograms](https://github.com/dalenhsiao/PINN-and-thermography-processing/blob/main/Doc/Raw_thermograms.gif)
 ### Data
 Use the following code to load the .mat data:
 ```python
-import scipy.io
-import numpy
-data = scipy.io.loadmat(r'./defect1.mat')
-raw = np.array(data["matrix"])
+from data_loader import *
+# data_loader(filepath, MAT_dict_label, #of sample pixels, sample real dimensions, inspect tspan)
+dl = data_loader("./data/defect1.mat", "matrix",sample_pixels, sample_dims, tspan)
 ```
 - Thermography Data: Data captured from Active thermography and translated into matrix
 - Collocation Data: Data generated using Latin Hypercube Sampling (LHS) which is uniformly distributed in the (x,y,z,t) data space
 - Boundary Condition: BC at each timestep
 
-### Model Structure
-The physics information input as PDE combine with a deep neural netwrok structure
 
 
 
