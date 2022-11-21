@@ -71,12 +71,6 @@ dl = data_loader("./data/defect1.mat", "matrix",sample_pixels, sample_dims, tspa
 
 
 
-# Specimen 2
-
-
-
-
-
 
 
 # Reminder
