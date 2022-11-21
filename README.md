@@ -44,6 +44,8 @@ The methodology also perform the Fourier's Law PDE parameter discovery, in term 
 
 - ```data_loader.py``` loads and format the input training data for PINN model training. 
 
+- ```utilities.py``` utilities. 
+
 - ```specimen1_main.py``` is the main code for the PINN evaluation for specimen 1
 
 
