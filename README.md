@@ -76,7 +76,8 @@ dl = data_loader("./data/defect1.mat", "matrix",sample_pixels, sample_dims, tspa
 # Reminder
 The numpy reshape causes bug in reshaping the image data into (pixels, time_step)
 
-Please use our reshape function in the following for image reshaping, you can also find it in the Utilities
+while our reshape function in the following could fix the unpleasant bug. 
+It can be find in ```utilities.py```
 ```python
 # The processed matrix_store.shape() = (width*length, time_step)
 def reshape(matrix_store, matrix, x, y, T):
