@@ -4,8 +4,9 @@
 import numpy as np
 from data_loader import *
 from PINN_model import *
+from utilities import *
 import os
-
+tf.random.set_seed(1234)
 def cf(directory):
     try:
         if not os.path.exists(directory):
@@ -13,9 +14,11 @@ def cf(directory):
     except OSError:
         print ('Error: Creating directory. ' +  directory)
 
-
-sample_pixels = (617,425, 100)
+# sample description
+sample_pixels = (617,425, 200)
 sample_dims = (0.18, 0.18, 0.052)
+
+# time interval inspection
 tspan = (9, 82)
 pnts_no = sample_pixels[0]*sample_pixels[1]
 total_t = tspan[1]-tspan[0]
@@ -25,45 +28,46 @@ n_train = 100000
 n_f = 10000
 n_bc = 10000
 
-# data_loader(filepath, MAT_dict_label, #of sample pixels, sample real dimensions, inspect tspan)
-dl = data_loader("./data/defect1.mat", "matrix",sample_pixels, sample_dims, tspan)
-# training data sampling 
+file_path = "./defect1.mat"
+data = np.array(scipy.io.loadmat(file_path)["matrix"], dtype=np.float32)
+dl = data_loader(data,sample_pixels, sample_dims, tspan)
+
+# data sampling
 X_train = dl.training_X(n_train)
 X_f = dl.collocation_data(n_f)
 x_bc, y_bc, z_bc = dl.bc_data(n_bc)
-
-# boundary coordinates 
 lb, ub = dl.lb, dl.ub
 
-# real pixel values
+# real
 X_star = dl.X_star()
 U = dl.real_u()
 
 
 # Training
+
 N_iter = 100000
 lambda_array = np.zeros(N_iter+2, dtype=float)
 loss_array = np.zeros(N_iter+2,dtype=float)
 
-# Model
-layers = [4, 30, 30, 30, 30, 30, 30, 1] 
-model = PhysicsInformedNN(X_train, X_f, lb, ub,x_bc, y_bc, z_bc,layers) 
+layers = [4, 30, 30, 30, 30, 30, 30, 1]
+model = PhysicsInformedNN(X_train, X_f, lb, ub,x_bc, y_bc, z_bc,layers)
 model.summary()
 
-# Trainning 
-# Model default stopped at early stopping 1000 steps amd save best paramters only
-Dir = "./Results/"
+Dir = "./Results"
 cf(Dir)
-model.train(N_iter, loss_array, lambda_array, fileName=Dir+"training")
+model.train(N_iter, loss_array, lambda_array, fileName=Dir+"11_18")
 model.save(Dir+"model.pkl")
 
-# Prediction
+# prediction evaluate
 u_pred = model.predict(X_star)
-u_diff = U-u_pred
+u_pred = dl.reverse_normalize(u_pred.reshape(pnts_no, total_t).T)
+U = dl.reverse_normalize(U.reshape(pnts_no, total_t).T)
 
-u_pred = u_pred.reshape(pnts_no, total_t).T
-u_diff = u_diff.reshape(pnts_no, total_t).T
 
+# loss trend
+u_diff = U - u_pred
+# residue at each frame
+rmse_min = loss_trend(u_diff)
 # Plot result
 for i in range(0, total_t):
     plt.subplot(10, 8, i + 1)
