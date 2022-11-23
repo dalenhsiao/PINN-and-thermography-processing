@@ -6,13 +6,15 @@ import copy
 import numpy as np
 from utilities import *
 from pyDOE import lhs
+from sklearn import preprocessing
 
 
 class data_loader(object):
+    # data = numpy array; (time_step, image_pixels)
     # sample_pixels = [num_height_pixels,num_width_pixels,num_depth_pixels]
     # sample_dims (actual sample size)= [height, width, depth]
     # t_span = (lb, ub)
-    def __init__(self,file_path, MAT_dict_label, sample_pixels,sample_dims,t_span):
+    def __init__(self,data, sample_pixels,sample_dims,t_span):
         # pixel no
         self.height = sample_pixels[0]
         self.width = sample_pixels[1]
@@ -23,9 +25,11 @@ class data_loader(object):
         len_d = sample_dims[2]
 
         # load data
-        data = scipy.io.loadmat(file_path)
-        # matrix = (t, pntsno)
-        matrix = copy.deepcopy(np.array(data['matrix'], dtype=int)[t_span[0]:t_span[1], :]) / 255
+        # data = (t, points)
+        self.data = data
+        
+        # Normalization
+        matrix = copy.deepcopy(self.normalize(self.data)[t_span[0]:t_span[1], :])
         total_t = t_span[1]-t_span[0]
 
         # Reshape matrix into (points, t) and store in U_star
@@ -36,7 +40,7 @@ class data_loader(object):
         self.t_star = t_star.reshape(-1, 1)  # T x 1
         self.sample_pixels = sample_pixels
 
-        # location
+        # grid interval
         self.x_interval = len_h / self.height
         self.y_interval = len_w / self.width
         self.z_interval = len_d / self.depth
@@ -51,8 +55,14 @@ class data_loader(object):
         # self.U = (pixel value)
         UU = self.U_star[:, :]  # N x T
         self.U = UU.flatten()[:, None]  # NT x 1
-
-
+    def normalize(self, matrix):
+        self.min = np.min(matrix)
+        self.max = np.max(matrix)
+        normalized = (matrix-self.min)/(self.max-self.min)
+        return normalized
+    def reverse_normalize(self, matrix):
+        denormalized = matrix*(self.max-self.min)+self.min
+        return denormalized
     # IR thermography only capture the surface temperature (z=0)
     def training_X(self, n_train):
         X_star = np.empty([self.U_star.shape[0], 3])
@@ -125,4 +135,5 @@ class data_loader(object):
             bc_ub_idx = [idx for idx, output in enumerate(location) if location[idx, 2] == self.ub[2]]
             bc = bc_ub_idx + bc_lb_idx
         return bc
+
 
