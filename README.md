@@ -33,9 +33,9 @@ The methodology also perform the Fourier's Law PDE parameter discovery, in term 
 # Assumptions 
 - We assume the sound regions are much larger than defect regions, that is, the sound regions consist the majority of the training data. By that, the model predicted image shall represent the general background of the thermography data. 
 
-- The sample is assumed to be a heat insulator, meaning there will be no heat exhange at the boudaries.
+- The sample is assumed to be a heat insulator, meaning there will be no heat exhange at the boundaries.
 
-- The evaluated data is collected during the cooldown pahse where there is no external heat source and only focuses on the heat diffusion inside the sample.
+- The evaluated data is collected during the cooldown phase where there is no external heat source and only focuses on the heat diffusion inside the sample.
 
 
 
